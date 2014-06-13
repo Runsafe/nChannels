@@ -26,7 +26,7 @@ public class nChannels extends RunsafeConfigurablePlugin
 		command.addSubCommand(getInstance(InviteCommand.class));
 		command.addSubCommand(getInstance(UninviteCommand.class));
 		command.addSubCommand(getInstance(JoinCommand.class));
-		command.addSubCommand(getInstance(PartCommand.class));
+		command.addSubCommand(getInstance(LeaveCommand.class));
 		command.addSubCommand(getInstance(VoiceCommand.class));
 		command.addSubCommand(getInstance(KickCommand.class));
 	}
