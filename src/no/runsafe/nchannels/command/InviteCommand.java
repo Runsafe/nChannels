@@ -8,7 +8,7 @@ import no.runsafe.framework.api.player.IPlayer;
 
 public class InviteCommand extends PlayerAsyncCommand
 {
-	protected InviteCommand(IScheduler scheduler)
+	public InviteCommand(IScheduler scheduler)
 	{
 		super("invite", "Invite someone to join your channel", "runsafe.channel.<channel>.invite", scheduler, new Player().onlineOnly().require());
 	}
