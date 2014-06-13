@@ -6,11 +6,11 @@ import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerAsyncCommand;
 import no.runsafe.framework.api.player.IPlayer;
 
-public class PartCommand extends PlayerAsyncCommand
+public class LeaveCommand extends PlayerAsyncCommand
 {
-	public PartCommand(IScheduler scheduler)
+	public LeaveCommand(IScheduler scheduler)
 	{
-		super("part", "Leave the channel", "runsafe.channel.<channel>.part", scheduler, new TrailingArgument("reason", false));
+		super("leave", "Leave the channel", "runsafe.channel.<channel>.leave", scheduler, new TrailingArgument("reason", false));
 	}
 
 	@Override
