@@ -9,6 +9,7 @@ import no.runsafe.framework.features.Events;
 import no.runsafe.nchannels.command.*;
 import no.runsafe.nchannels.database.ChannelRepository;
 import no.runsafe.nchannels.event.JoinEvent;
+import no.runsafe.nchannels.handler.AutoJoinHandler;
 
 public class nChannels extends RunsafeConfigurablePlugin
 {
@@ -25,6 +26,7 @@ public class nChannels extends RunsafeConfigurablePlugin
 		// Plugin components
 		addComponent(JoinEvent.class);
 		addComponent(ChannelRepository.class);
+		addComponent(AutoJoinHandler.class);
 
 		// Commands
 		Command command = new Command("channel", "Manage chat channels", null, new RequiredArgument("channel"));
