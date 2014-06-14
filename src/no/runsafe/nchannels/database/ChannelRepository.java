@@ -33,7 +33,7 @@ public class ChannelRepository extends Repository
 		update.addQueries(
 			"CREATE TABLE nchannel_channels (" +
 				"name VARCHAR(10) NOT NULL," +
-				"int mode NOT NULL," +
+				"mode tinyint NOT NULL," +
 				"PRIMARY KEY (name)" +
 				")"
 		);
