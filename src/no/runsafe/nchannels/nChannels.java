@@ -1,6 +1,6 @@
 package no.runsafe.nchannels;
 
-import no.runsafe.framework.RunsafeConfigurablePlugin;
+import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.features.Commands;
@@ -13,7 +13,7 @@ import no.runsafe.nchannels.database.ChannelRepository;
 import no.runsafe.nchannels.event.PlayerEvents;
 import no.runsafe.nchannels.handler.CustomChannelHandler;
 
-public class nChannels extends RunsafeConfigurablePlugin
+public class nChannels extends RunsafePlugin
 {
 	@Override
 	protected void pluginSetup()
