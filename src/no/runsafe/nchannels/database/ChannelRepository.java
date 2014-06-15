@@ -57,7 +57,7 @@ public class ChannelRepository extends Repository
 	{
 		int flags = database.queryInteger("SELECT mode FROM nchannel_channels WHERE name=?", name);
 		flags = enabled ? flags | mode.getFlagValue() : flags & ~mode.getFlagValue();
-		database.update("UPDATE nchannel_channels SET mode=? WHERE name=?", name, flags);
+		database.update("UPDATE nchannel_channels SET mode=? WHERE name=?", flags, name);
 	}
 
 	public List<CustomChatChannel> getChannels()
