@@ -7,6 +7,7 @@ import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
 import no.runsafe.nchannels.command.JoinCommand;
+import no.runsafe.nchannels.command.LeaveCommand;
 import no.runsafe.nchannels.command.ModeCommand;
 import no.runsafe.nchannels.database.ChannelMembershipRepository;
 import no.runsafe.nchannels.database.ChannelRepository;
@@ -32,11 +33,11 @@ public class nChannels extends RunsafePlugin
 		// Commands
 		Command command = new Command("channel", "Manage chat channels", null, new RequiredArgument("channel"));
 		command.addSubCommand(getInstance(JoinCommand.class));
+		command.addSubCommand(getInstance(LeaveCommand.class));
 		command.addSubCommand(getInstance(ModeCommand.class));
 		// Not yet implemented
 //		command.addSubCommand(getInstance(InviteCommand.class));
 //		command.addSubCommand(getInstance(UninviteCommand.class));
-//		command.addSubCommand(getInstance(LeaveCommand.class));
 //		command.addSubCommand(getInstance(VoiceCommand.class));
 //		command.addSubCommand(getInstance(KickCommand.class));
 		addComponent(command);
