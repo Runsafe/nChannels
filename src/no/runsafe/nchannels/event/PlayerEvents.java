@@ -35,8 +35,9 @@ public class PlayerEvents implements IPlayerQuitEvent, IPlayerJoinEvent, IPlayer
 	@Override
 	public void OnPlayerJoinEvent(RunsafePlayerJoinEvent event)
 	{
-		if (event.isFake())
+		if (event == null || event.isFake())
 			return;
+		
 		IPlayer player = event.getPlayer();
 		debugger.debugFine("Processing join server event for " + player.getName());
 		for (String channel : channelMembershipRepository.getPlayerChannels(player.getName()))
