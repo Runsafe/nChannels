@@ -3,6 +3,7 @@ package no.runsafe.nchannels.database;
 import no.runsafe.framework.api.database.ISchemaUpdate;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.database.SchemaUpdate;
+import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -31,9 +32,9 @@ public class ChannelMembershipRepository extends Repository
 		return update;
 	}
 
-	public List<String> getPlayerChannels(String player)
+	public List<String> getPlayerChannels(IPlayer player)
 	{
-		return database.queryStrings("SELECT channel FROM nchannel_members WHERE player=?", player);
+		return database.queryStrings("SELECT channel FROM nchannel_members WHERE player=?", player.getName());
 	}
 
 	public List<String> getChannelPlayers(String channel)
@@ -41,12 +42,12 @@ public class ChannelMembershipRepository extends Repository
 		return database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
 	}
 
-	public boolean addPlayerToChannel(String channel, String player)
+	public boolean addPlayerToChannel(String channel, IPlayer player)
 	{
-		return database.execute("INSERT INTO nchannel_members (channel, player) VALUES (?, ?)", channel, player);
+		return database.execute("INSERT INTO nchannel_members (channel, player) VALUES (?, ?)", channel, player.getName());
 	}
 
-	public boolean removePlayerFromChannel(String channel, String player)
+	public boolean removePlayerFromChannel(String channel, IPlayer player)
 	{
 		return database.execute("DELETE FROM nchannel_members WHERE channel=? AND player=?", channel, player);
 	}
@@ -56,8 +57,8 @@ public class ChannelMembershipRepository extends Repository
 		return database.execute("DELETE FROM nchannel_members WHERE channel=?", channel);
 	}
 
-	public boolean clearPlayer(String player)
+	public boolean clearPlayer(IPlayer player)
 	{
-		return database.execute("DELETE FROM nchannel_members WHERE player=?", player);
+		return database.execute("DELETE FROM nchannel_members WHERE player=?", player.getName());
 	}
 }
