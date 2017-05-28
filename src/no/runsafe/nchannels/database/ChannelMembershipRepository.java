@@ -32,6 +32,15 @@ public class ChannelMembershipRepository extends Repository
 				")"
 		);
 		update.addQueries("ALTER TABLE nchannel_members MODIFY COLUMN player VARCHAR(36)");
+
+		update.addQueries( // Update UUIDs
+			String.format(
+				"UPDATE IGNORE `%s` SET `player` = " +
+					"COALESCE((SELECT `uuid` FROM player_db WHERE `name`=`%s`.`player`), `player`) " +
+					"WHERE length(`player`) != 36",
+				getTableName(), getTableName()
+			)
+		);
 		return update;
 	}
 
