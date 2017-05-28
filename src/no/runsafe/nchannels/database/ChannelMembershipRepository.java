@@ -16,7 +16,7 @@ public class ChannelMembershipRepository extends Repository
 	@Override
 	public String getTableName()
 	{
-		return "mchannel_members";
+		return "nchannel_members";
 	}
 
 	@Nonnull
