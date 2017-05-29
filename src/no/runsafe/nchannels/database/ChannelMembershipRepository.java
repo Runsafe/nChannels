@@ -4,6 +4,7 @@ import no.runsafe.framework.api.database.ISchemaUpdate;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.database.SchemaUpdate;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.api.server.IPlayerProvider;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -12,6 +13,11 @@ import java.util.UUID;
 
 public class ChannelMembershipRepository extends Repository
 {
+	public ChannelMembershipRepository(IPlayerProvider playerProvider)
+	{
+		this.playerProvider = playerProvider;
+	}
+
 	@Nonnull
 	@Override
 	public String getTableName()
@@ -49,12 +55,12 @@ public class ChannelMembershipRepository extends Repository
 		return database.queryStrings("SELECT channel FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
 	}
 
-	public List<UUID> getChannelPlayers(String channel)
+	public List<IPlayer> getChannelPlayers(String channel)
 	{
 		List<String> stringIds = database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
-		List<UUID> playerIds = new ArrayList<UUID>();
+		List<IPlayer> playerIds = new ArrayList<>();
 		for(String playerStringId : stringIds)
-			playerIds.add(UUID.fromString(playerStringId));
+			playerIds.add(playerProvider.getPlayer(UUID.fromString(playerStringId)));
 
 		return playerIds;
 	}
@@ -78,4 +84,6 @@ public class ChannelMembershipRepository extends Repository
 	{
 		return database.execute("DELETE FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
 	}
+
+	private final IPlayerProvider playerProvider;
 }
