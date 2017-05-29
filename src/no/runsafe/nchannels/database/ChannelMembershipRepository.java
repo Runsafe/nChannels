@@ -50,6 +50,12 @@ public class ChannelMembershipRepository extends Repository
 		return update;
 	}
 
+	public Boolean isEmptyChannel(String channel)
+	{
+		List<String> stringIds = database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
+		return stringIds.isEmpty();
+	}
+
 	public List<String> getPlayerChannels(IPlayer player)
 	{
 		return database.queryStrings("SELECT channel FROM nchannel_members WHERE player=?", player.getUniqueId().toString());

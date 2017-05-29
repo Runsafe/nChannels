@@ -78,7 +78,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 		{
 			channelMembershipRepository.removePlayerFromChannel(channelName, player);
 			channel.SendSystem(player.getPrettyName() + " has left the channel.");
-			if (channelMembershipRepository.getChannelPlayers(channelName).isEmpty())
+			if (channelMembershipRepository.isEmptyChannel(channelName))
 				if(channelRepository.removeChannel(channelName))
 					manager.unregisterChannel(channel);
 		}
