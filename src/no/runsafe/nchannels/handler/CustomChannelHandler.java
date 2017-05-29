@@ -61,7 +61,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 
 		if (channel.Join(player))
 		{
-			channelMembershipRepository.addPlayerToChannel(channelName, player.getName());
+			channelMembershipRepository.addPlayerToChannel(channelName, player);
 			channel.SendSystem(player.getPrettyName() + " has joined the channel!");
 		}
 	}
@@ -76,7 +76,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 
 		if (channel.Leave(player))
 		{
-			channelMembershipRepository.removePlayerFromChannel(channelName, player.getName());
+			channelMembershipRepository.removePlayerFromChannel(channelName, player);
 			channel.SendSystem(player.getPrettyName() + " has left the channel.");
 			if (channelMembershipRepository.getChannelPlayers(channelName).isEmpty())
 				if(channelRepository.removeChannel(channelName))

@@ -40,7 +40,7 @@ public class PlayerEvents implements IPlayerQuitEvent, IPlayerJoinEvent, IPlayer
 		
 		IPlayer player = event.getPlayer();
 		debugger.debugFine("Processing join server event for " + player.getName());
-		for (String channel : channelMembershipRepository.getPlayerChannels(player.getName()))
+		for (String channel : channelMembershipRepository.getPlayerChannels(player))
 			manager.getChannelByName(channel).Join(player);
 	}
 
@@ -49,7 +49,7 @@ public class PlayerEvents implements IPlayerQuitEvent, IPlayerJoinEvent, IPlayer
 	{
 		if (event.getPlayer().isNotBanned())
 			return;
-		channelMembershipRepository.clearPlayer(event.getPlayer().getName());
+		channelMembershipRepository.clearPlayer(event.getPlayer());
 	}
 
 	private final IDebug debugger;
