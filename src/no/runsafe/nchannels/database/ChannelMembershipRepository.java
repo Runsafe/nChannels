@@ -31,7 +31,7 @@ public class ChannelMembershipRepository extends Repository
 	{
 		ISchemaUpdate update = new SchemaUpdate();
 		update.addQueries(
-			"CREATE TABLE IF NOT EXISTS nchannel_members (" +
+			"CREATE TABLE nchannel_members (" +
 				"channel VARCHAR(10) NOT NULL," +
 				"player VARCHAR(20) NOT NULL," +
 				"PRIMARY KEY (channel, player)" +
