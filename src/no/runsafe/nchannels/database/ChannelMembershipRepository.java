@@ -7,9 +7,7 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.api.server.IPlayerProvider;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ChannelMembershipRepository extends Repository
 {
