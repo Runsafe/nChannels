@@ -63,12 +63,7 @@ public class ChannelMembershipRepository extends Repository
 
 	public List<IPlayer> getChannelPlayers(String channel)
 	{
-		List<String> stringIds = database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
-		List<IPlayer> playerIds = new ArrayList<>();
-		for(String playerStringId : stringIds)
-			playerIds.add(playerProvider.getPlayer(UUID.fromString(playerStringId)));
-
-		return playerIds;
+		return playerProvider.getPlayersByIDs(database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel));
 	}
 
 	public boolean addPlayerToChannel(String channel, IPlayer player)
