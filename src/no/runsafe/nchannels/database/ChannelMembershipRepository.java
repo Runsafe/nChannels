@@ -4,16 +4,14 @@ import no.runsafe.framework.api.database.ISchemaUpdate;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.database.SchemaUpdate;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.api.server.IPlayerProvider;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ChannelMembershipRepository extends Repository
 {
-	public ChannelMembershipRepository(IPlayerProvider playerProvider)
+	public ChannelMembershipRepository()
 	{
-		this.playerProvider = playerProvider;
 	}
 
 	@Nonnull
@@ -61,7 +59,7 @@ public class ChannelMembershipRepository extends Repository
 
 	public List<IPlayer> getChannelPlayers(String channel)
 	{
-		return playerProvider.getPlayersByIDs(database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel));
+		return database.queryPlayers("SELECT player FROM nchannel_members WHERE channel=?", channel);
 	}
 
 	public boolean addPlayerToChannel(String channel, IPlayer player)
@@ -83,6 +81,4 @@ public class ChannelMembershipRepository extends Repository
 	{
 		return database.execute("DELETE FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
 	}
-
-	private final IPlayerProvider playerProvider;
 }
