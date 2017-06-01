@@ -6,12 +6,14 @@ import no.runsafe.framework.api.database.SchemaUpdate;
 import no.runsafe.framework.api.player.IPlayer;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ChannelMembershipRepository extends Repository
 {
+	public ChannelMembershipRepository()
+	{
+	}
+
 	@Nonnull
 	@Override
 	public String getTableName()
@@ -44,19 +46,20 @@ public class ChannelMembershipRepository extends Repository
 		return update;
 	}
 
+	public Boolean isEmptyChannel(String channel)
+	{
+		List<String> stringIds = database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
+		return stringIds.isEmpty();
+	}
+
 	public List<String> getPlayerChannels(IPlayer player)
 	{
 		return database.queryStrings("SELECT channel FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
 	}
 
-	public List<UUID> getChannelPlayers(String channel)
+	public List<IPlayer> getChannelPlayers(String channel)
 	{
-		List<String> stringIds = database.queryStrings("SELECT player FROM nchannel_members WHERE channel=?", channel);
-		List<UUID> playerIds = new ArrayList<UUID>();
-		for(String playerStringId : stringIds)
-			playerIds.add(UUID.fromString(playerStringId));
-
-		return playerIds;
+		return database.queryPlayers("SELECT player FROM nchannel_members WHERE channel=?", channel);
 	}
 
 	public boolean addPlayerToChannel(String channel, IPlayer player)

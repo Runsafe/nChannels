@@ -1,10 +1,10 @@
 package no.runsafe.nchannels.handler;
 
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.event.IServerReady;
 import no.runsafe.framework.api.event.player.IPlayerJoinEvent;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.api.server.IPlayerProvider;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerJoinEvent;
 import no.runsafe.nchannels.database.ChannelMembershipRepository;
 import no.runsafe.nchannels.database.ChannelRepository;
@@ -18,10 +18,10 @@ import java.util.List;
 
 public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 {
-	public CustomChannelHandler(IConsole console, IServer server, IChannelManager manager, ChannelRepository channelRepository, ChannelMembershipRepository channelMembershipRepository)
+	public CustomChannelHandler(IConsole console, IPlayerProvider playerProvider, IChannelManager manager, ChannelRepository channelRepository, ChannelMembershipRepository channelMembershipRepository)
 	{
 		this.console = console;
-		this.server = server;
+		this.playerProvider = playerProvider;
 		this.manager = manager;
 		this.channelRepository = channelRepository;
 		this.channelMembershipRepository = channelMembershipRepository;
@@ -78,7 +78,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 		{
 			channelMembershipRepository.removePlayerFromChannel(channelName, player);
 			channel.SendSystem(player.getPrettyName() + " has left the channel.");
-			if (channelMembershipRepository.getChannelPlayers(channelName).isEmpty())
+			if (channelMembershipRepository.isEmptyChannel(channelName))
 				if(channelRepository.removeChannel(channelName))
 					manager.unregisterChannel(channel);
 		}
@@ -121,7 +121,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 	{
 		autoJoinChannels.add(channel);
 		channelMembershipRepository.clearChannel(channel.getName());
-		for (IPlayer player : server.getOnlinePlayers())
+		for (IPlayer player : playerProvider.getOnlinePlayers())
 			ProcessAutoJoin(player, channel);
 	}
 
@@ -132,7 +132,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 	}
 
 	private final IConsole console;
-	private final IServer server;
+	private final IPlayerProvider playerProvider;
 	private final IChannelManager manager;
 	private final ChannelRepository channelRepository;
 	private final ChannelMembershipRepository channelMembershipRepository;
