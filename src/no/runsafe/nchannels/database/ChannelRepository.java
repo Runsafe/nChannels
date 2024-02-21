@@ -62,13 +62,13 @@ public class ChannelRepository extends Repository
 
 	public List<CustomChatChannel> getChannels()
 	{
-		List<CustomChatChannel> channels = new ArrayList<CustomChatChannel>(0);
+		List<CustomChatChannel> channels = new ArrayList<>(0);
 		ISet channelSet = database.query("SELECT * FROM nchannel_channels");
 		for (IRow channel : channelSet)
 			channels.add(new CustomChatChannel(console, manager, channel.String("name"), channel.Integer("mode")));
 		return channels;
 	}
 
-	private IConsole console;
-	private IChannelManager manager;
+	private final IConsole console;
+	private final IChannelManager manager;
 }

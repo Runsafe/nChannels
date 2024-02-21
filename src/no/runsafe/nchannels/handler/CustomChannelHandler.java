@@ -136,5 +136,5 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 	private final IChannelManager manager;
 	private final ChannelRepository channelRepository;
 	private final ChannelMembershipRepository channelMembershipRepository;
-	private final List<CustomChatChannel> autoJoinChannels = new ArrayList<CustomChatChannel>(0);
+	private final List<CustomChatChannel> autoJoinChannels = new ArrayList<>(0);
 }

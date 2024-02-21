@@ -17,7 +17,7 @@ public class JoinCommand extends PlayerAsyncCommand
 	@Override
 	public String OnAsyncExecute(IPlayer executor, IArgumentList parameters)
 	{
-		handler.join((String)parameters.getRequired("channel"), executor);
+		handler.join(parameters.getRequired("channel"), executor);
 		return null;
 	}
 

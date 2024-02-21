@@ -20,9 +20,11 @@ public class ModeCommand extends PlayerAsyncCommand
 	@Override
 	public String OnAsyncExecute(IPlayer executor, IArgumentList parameters)
 	{
-		handler.setFlag((String) parameters.getRequired("channel"), (Mode) parameters.getRequired("mode"), (Boolean) parameters.getRequired("on"));
+		handler.setFlag(parameters.getRequired("channel"), parameters.getRequired("mode"),
+		                parameters.getRequired("on")
+		);
 		return null;
 	}
 
-	private CustomChannelHandler handler;
+	private final CustomChannelHandler handler;
 }

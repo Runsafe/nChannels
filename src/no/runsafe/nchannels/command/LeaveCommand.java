@@ -18,7 +18,7 @@ public class LeaveCommand extends PlayerAsyncCommand
 	@Override
 	public String OnAsyncExecute(IPlayer executor, IArgumentList parameters)
 	{
-		handler.leave((String) parameters.getRequired("channel"), executor, (String) parameters.getValue("reason"));
+		handler.leave(parameters.getRequired("channel"), executor, parameters.getValue("reason"));
 		return null;
 	}
 

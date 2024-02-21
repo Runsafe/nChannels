@@ -21,7 +21,7 @@ public class CustomChatChannel extends BasicChatChannel
 	{
 		if (on && !flags.contains(flag))
 			flags.add(flag);
-		if (!on && flags.contains(flag))
+		if (!on)
 			flags.remove(flag);
 	}
 
@@ -30,5 +30,5 @@ public class CustomChatChannel extends BasicChatChannel
 		return flags.contains(flag);
 	}
 
-	private final List<Mode> flags = new ArrayList<Mode>(0);
+	private final List<Mode> flags = new ArrayList<>(0);
 }

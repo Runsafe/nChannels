@@ -6,7 +6,7 @@ public enum Mode
 	AutoJoin(2),
 	Moderated(4);
 
-	private Mode(int value)
+	Mode(int value)
 	{
 		flagValue = value;
 	}
