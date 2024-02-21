@@ -62,23 +62,23 @@ public class ChannelMembershipRepository extends Repository
 		return database.queryPlayers("SELECT player FROM nchannel_members WHERE channel=?", channel);
 	}
 
-	public boolean addPlayerToChannel(String channel, IPlayer player)
+	public void addPlayerToChannel(String channel, IPlayer player)
 	{
-		return database.execute("INSERT INTO nchannel_members (channel, player) VALUES (?, ?)", channel, player.getUniqueId().toString());
+		database.execute("INSERT INTO nchannel_members (channel, player) VALUES (?, ?)", channel, player.getUniqueId().toString());
 	}
 
-	public boolean removePlayerFromChannel(String channel, IPlayer player)
+	public void removePlayerFromChannel(String channel, IPlayer player)
 	{
-		return database.execute("DELETE FROM nchannel_members WHERE channel=? AND player=?", channel, player.getUniqueId().toString());
+		database.execute("DELETE FROM nchannel_members WHERE channel=? AND player=?", channel, player.getUniqueId().toString());
 	}
 
-	public boolean clearChannel(String channel)
+	public void clearChannel(String channel)
 	{
-		return database.execute("DELETE FROM nchannel_members WHERE channel=?", channel);
+		database.execute("DELETE FROM nchannel_members WHERE channel=?", channel);
 	}
 
-	public boolean clearPlayer(IPlayer player)
+	public void clearPlayer(IPlayer player)
 	{
-		return database.execute("DELETE FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
+		database.execute("DELETE FROM nchannel_members WHERE player=?", player.getUniqueId().toString());
 	}
 }

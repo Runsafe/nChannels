@@ -105,10 +105,13 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 
 	private IChatChannel createChannel(String channelName)
 	{
-		channelRepository.addChannel(channelName);
-		CustomChatChannel channel = new CustomChatChannel(console, manager, channelName, 0);
-		manager.registerChannel(channel);
-		return channel;
+		if (channelRepository.addChannel(channelName))
+		{
+			CustomChatChannel channel = new CustomChatChannel(console, manager, channelName, 0);
+			manager.registerChannel(channel);
+			return channel;
+		}
+		return null;
 	}
 
 	private void DestroyAutoJoinChannel(CustomChatChannel channel)
