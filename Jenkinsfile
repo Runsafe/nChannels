@@ -6,8 +6,7 @@ pipeline {
   }
   environment { plugin = "nChannels" }
   triggers {
-    upstream '/Runsafe/nChat/master'
-    upstream '/Runsafe/nChat/develop'
+    upstream '/Runsafe/nChat/master,/Runsafe/nChat/develop'
     pollSCM '@monthly'
   }
   stages {
