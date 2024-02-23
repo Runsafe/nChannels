@@ -55,7 +55,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 		if (channel == null)
 			channel = createChannel(channelName);
 
-		// Protect channels we don't manage and autojoin from being joined
+		// Protect channels we don't manage and auto-join from being joined
 		if (!(channel instanceof CustomChatChannel) || ((CustomChatChannel) channel).isFlagSet(Mode.AutoJoin))
 			return;
 
@@ -70,7 +70,7 @@ public class CustomChannelHandler implements IServerReady, IPlayerJoinEvent
 	{
 		IChatChannel channel = manager.getChannelByName(channelName);
 
-		// Protect channels we don't manage and autojoin from being left
+		// Protect channels we don't manage and auto-join from being left
 		if (!(channel instanceof CustomChatChannel) || ((CustomChatChannel) channel).isFlagSet(Mode.AutoJoin))
 			return;
 

@@ -3,7 +3,7 @@ main: no.runsafe.nchannels.nChannels
 version: 1.0.@BUILD@
 authors: [mortenn, Kruithne]
 depend: [nChat]
-description:
+description: 'Chat channel support for minecraft'
 commands:
   channel:
     description: Manage chat channels
